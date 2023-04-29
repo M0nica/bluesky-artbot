@@ -14,7 +14,7 @@ async function start() {
 
     /* initialize BskyAgent and login  */
     const agent = new BskyAgent({
-        service: process.env.BLUESKY_IDENTIFIER
+        service: process.env.BLUESKY_SERVER
     })
 
     await agent.login({
