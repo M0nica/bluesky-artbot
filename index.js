@@ -1,32 +1,35 @@
 import bsky from '@atproto/api'
 import * as dotenv from 'dotenv'
+dotenv.config();
+
 import { getGradientImage } from './generateGradientImage.js';
 
 import fs from "fs";
-const {BskyAgent} = bsky;
-
-const agent = new BskyAgent({
-    service: 'https://bsky.social'
-})
-
-dotenv.config();
+const { BskyAgent, RichText, } = bsky;
 
 start();
 
 
 async function start(){
+
+    const agent = new BskyAgent({
+        service: process.env.BLUESKY_IDENTIFIER
+    })
+
+
     await agent.login({
         identifier: process.env.BLUESKY_USERNAME,
         password: process.env.BLUESKY_PASSWORD
     });
 
-    const imageUrl = getGradientImage()//'./myCanvas.jpg'
+   const {path: imagePath, startColor, endColor} = await getGradientImage();
+   const file = fs.readFileSync(imagePath)
    
-    const response = await agent.uploadBlob(imageUrl, {
+    const response = await agent.uploadBlob(file, {
         encoding: "image/jpeg",
     })
 
-    
+
 if (!response.success) {
     const msg = `Unable to upload image`// ${imageUrl}`;
     console.error(msg, response);
@@ -38,8 +41,13 @@ const {
 } = response;
 
 
+    const rt = new RichText({ text: `computer-generated gradient from ${startColor} to ${endColor}` });
+    await rt.detectFacets(agent);
+
+
 return agent.post({
-    text: 'testing image upload',
+    text: rt.text,
+    facets: rt.facets,
     embed: {
         $type: "app.bsky.embed.images",
         images: [
@@ -52,3 +60,4 @@ return agent.post({
 });
 
 }
+

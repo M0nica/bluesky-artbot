@@ -2,6 +2,8 @@
 import * as p5  from 'node-p5';
 import * as fs from 'fs';
 
+const startColor = '#FAC3E6'
+const endColor = '#C375E3'
 
 export function createGradientImage(){
 // Constants
@@ -16,8 +18,8 @@ const sketch = ((p) => {
        let canvas = p.createCanvas(500, 500);
 
         // Define colors
-        b1 = p.color('#FAC3E6');
-        b2 = p.color('#C375E3');
+        b1 = p.color(startColor);
+        b2 = p.color(endColor);
 
         p.noLoop();
        
@@ -60,28 +62,14 @@ const sketch = ((p) => {
 });
 
 let p5Instance = p5.createSketch(sketch);}
-// Export the sketch
-//module.exports = sketch;
 
 export function getGradientImage(){
     createGradientImage()
 
-    const filePath = 'myCanvas.jpg';
 
- return new Promise((resolve, reject) => {
-    fs.readFile(filePath, (err, data) => {
-      if (err) reject(err);
+   return {path: './myCanvas.jpg', startColor, endColor}
 
-      // Convert image data to base64-encoded string
-      const base64Image = Buffer.from(data).toString('base64');
 
-      // Create data URL
-      const dataUrl = `data:image/jpeg;base64,${base64Image}`;
-
-      console.log(dataUrl)
-      resolve(dataUrl);     
-    });
-  });
 }
 
 getGradientImage();
