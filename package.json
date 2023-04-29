@@ -11,8 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "@atproto/api": "^0.2.11",
+    "cute-colors": "^1.0.2",
     "dotenv": "^16.0.3",
     "fs": "^0.0.1-security",
+    "hex-color-to-color-name": "^1.0.2",
+    "nice-color-palettes": "^3.0.0",
     "node-p5": "^1.0.4",
     "path": "^0.12.7"
   }

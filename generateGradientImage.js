@@ -1,9 +1,26 @@
 // Import the p5 library
-import * as p5  from 'node-p5';
-import * as fs from 'fs';
+import * as p5  from 'node-p5';;
 
-const startColor = '#FAC3E6'
-const endColor = '#C375E3'
+import colors from 'nice-color-palettes' assert { type: "json" };
+
+import { GetColorName } from 'hex-color-to-color-name';
+
+
+export const getColors = () => {
+    const colorIndex = Math.floor(Math.random() * colors.length);
+    console.log('gradient', colors[colorIndex])
+   const randomColors = colors[colorIndex];
+
+   return [randomColors[0],randomColors[randomColors.length - 1]]
+};
+
+
+const [startColor, endColor] = getColors();
+console.log('we have', startColor, endColor);
+
+
+const startColorName = GetColorName(startColor)
+const endColorName = GetColorName(endColor)
 
 export function createGradientImage(){
 // Constants
@@ -67,8 +84,9 @@ export function getGradientImage(){
     createGradientImage()
 
 
-   return {path: './myCanvas.jpg', startColor, endColor}
-
+   return {path: './myCanvas.jpg', startColor: {value: startColor,
+    string: startColorName}, endColor: {value: endColor, string: endColorName}
+   }
 
 }
 
