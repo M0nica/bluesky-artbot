@@ -7,17 +7,13 @@ import { GetColorName } from 'hex-color-to-color-name';
 
 
 export const getColors = () => {
-    const colorIndex = Math.floor(Math.random() * colors.length);
-    console.log('gradient', colors[colorIndex])
+   const colorIndex = Math.floor(Math.random() * colors.length);
    const randomColors = colors[colorIndex];
-
    return [randomColors[0],randomColors[randomColors.length - 1]]
 };
 
 
 const [startColor, endColor] = getColors();
-console.log('we have', startColor, endColor);
-
 
 const startColorName = GetColorName(startColor)
 const endColorName = GetColorName(endColor)
