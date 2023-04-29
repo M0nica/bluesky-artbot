@@ -37,7 +37,7 @@ const sketch = ((p) => {
         p.noLoop();
        
         setTimeout(() => {
-            p.saveCanvas(canvas, 'myCanvas', 'jpg').then(filename => {
+            p.saveCanvas(canvas, 'images/myCanvas', 'jpg').then(filename => {
                 console.log(`saved the canvas as ${filename}`);
             });
         }, 100);
@@ -80,7 +80,7 @@ export function getGradientImage(){
     createGradientImage()
 
 
-   return {path: './myCanvas.jpg', startColor: {value: startColor,
+   return {path: './images/myCanvas.jpg', startColor: {value: startColor,
     string: startColorName}, endColor: {value: endColor, string: endColorName}
    }
 
