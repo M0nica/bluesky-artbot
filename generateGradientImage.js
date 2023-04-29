@@ -76,10 +76,10 @@ const sketch = ((p) => {
 
 let p5Instance = p5.createSketch(sketch);}
 
+/* function to generate and return gradient image path along with meta data
+ about the start and end colors */
 export function getGradientImage(){
     createGradientImage()
-
-
    return {path: './images/myCanvas.jpg', startColor: {value: startColor,
     string: startColorName}, endColor: {value: endColor, string: endColorName}
    }
